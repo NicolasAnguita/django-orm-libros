@@ -1,0 +1,116 @@
+(con el ambiente activado en la carpeta del proyecto)
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell
+from books_authors_app import *
+
+Consulta: crea 5 libros con los siguientes nombres: C Sharp, Java, Python, PHP, Ruby
+
+CSharp_L1 = Book.objects.create(title="C Sharp", desc="sin descripcion")
+Java_L2 = Book.objects.create(title="Java", desc="sin descripcion")
+Python_L3 = Book.objects.create(title="Python", desc="sin descripcion")
+Php_L4 = Book.objects.create(title="PHP", desc="sin descripcion")
+Ruby_L5 = Book.objects.create(title="Ruby", desc="sin descripcion")
+
+Consulta: Crea 5 autores diferentes: Jane Austen, Emily Dickinson, Fyodor Dostoevksy, William Shakespeare, Lau Tzu
+
+author1 = Author.objects.create(first_name="Jane", last_name="Austen")
+author2 = Author.objects.create(first_name="Emily", last_name="Dickinson")
+author3= Author.objects.create(first_name="Fyodor", last_name="Dostoevksy")
+author4= Author.objects.create(first_name="William", last_name="Shakespeare")
+author5= Author.objects.create(first_name="Lau", last_name="Tzu")
+
+
+Agregue un nuevo campo de texto en la tabla de autores llamado 'notas'.
+
+notas = models.TextField()
+
+Cree y ejecute los archivos de migración para actualizar la tabla en su base de datos.
+
+exit()
+python manage.py makemigrations
+1
+"Sin notas"
+python manage.py migrate
+python manage.py shell
+from books_authors_app.models import *
+
+Consulta: cambie el nombre del libro de C Sharp a C #
+
+l1= Book.objects.get(id=1)
+l1.title="C #"
+l1.save()
+print(l1)
+
+Consulta: cambie el nombre del cuarto autor a Bill
+
+a4=Author.objects.get(id=4)
+a4.first_name="Bill"
+a4.save()
+print(a4)
+
+
+Consulta: Asigna el primer autor a los primeros 2 libros.
+
+a1=Author.objects.get(id=1)
+l1=Book.objects.get(id=1)
+l2=Book.objects.get(id=2)
+
+l1.authors.add(a1)
+l2.authors.add(a1)
+
+
+Consulta: Asigne el segundo autor a los primeros 3 libros.
+
+a2=Author.objects.get(id=2)
+l3=Book.objects.get(id=3)
+
+l1.authors.add(a2)
+l2.authors.add(a2)
+l3.authors.add(a2)
+
+Consulta: Asigna el tercer autor a los primeros 4 libros.
+
+a3=Author.objects.get(id=3)
+l4=Book.objects.get(id=4)
+
+l1.authors.add(a3)
+l2.authors.add(a3)
+l3.authors.add(a3)
+l4.authors.add(a3)
+
+
+Consulta: Asigne el cuarto autor a los primeros 5 libros (o en otras palabras, todos los libros)
+
+a4=Author.objects.get(id=4)
+l5=Book.objects.get(id=5)
+
+l1.authors.add(a4)
+l2.authors.add(a4)
+l3.authors.add(a4)
+l4.authors.add(a4)
+l5.authors.add(a4)
+
+Consulta: recupera a todos los autores del tercer libro
+
+authors_l3 = l3.authors.all()
+print(authors_l3)
+
+Consulta: eliminar al primer autor del tercer libro
+
+authors_l3[0].delete()
+
+Consulta: Agregue el quinto autor como uno de los autores del segundo libro.
+
+a5=Author.objects.get(id=5)
+l2.authors.add(a5)
+authors_l2 = l2.authors.all()
+
+
+Consulta: Encuentra todos los libros de los que el tercer autor es parte
+
+books_a3 = a3.books.all()
+
+Consulta: Encuentra todos los autores que contribuyeron al quinto libro.
+
+authors_l5 = l5.authors.all()
