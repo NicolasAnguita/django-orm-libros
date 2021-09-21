@@ -64,8 +64,8 @@ def libros(request, my_val):
     if request.method == "POST":
         print("a POST request is being made to this route")
         print(request.POST)
-
-        return redirect("libros/"+my_val)
+    #no se como redirigir aqui
+        return redirect("")
 
 
     context = {
